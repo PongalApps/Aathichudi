@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Aathichudi</string>
+    <string name="hello">¬ò¾¢ ÝÊ «Á÷ó¾ §¾Å¨É ²ò¾¢ ²ò¾¢ò ¦¾¡Ø§Å¡õ Â¡§Á.</string>
+    
+    <!-- Sections  -->
+    <string name="section1">¯Â¢÷ ÅÕì¸õ</string>
+    <string name="section2">¯Â¢÷¦Áö ÅÕì¸õ</string>
+    <string name="section3">¸¸Ã ÅÕì¸õ</string>
+    <string name="section4">º¸Ã ÅÕì¸õ</string>
+    <string name="section5">¾¸Ã ÅÕì¸õ</string>
+    <string name="section6">¿¸Ã ÅÕì¸õ</string>
+    <string name="section7">À¸Ã ÅÕì¸õ</string>
+    <string name="section8">Á¸Ã ÅÕì¸õ</string>
+    <string name="section9">Å¸Ã ÅÕì¸õ</string>
+    
+    
+    <string name="uyirvarukkam1">«Èõ ¦ºÂ Å¢ÕõÒ</string>
+    <string name="uyirvarukkam2">¬ÚÅÐ º¢Éõ</string>
+    <string name="uyirvarukkam3">þÂøÅÐ ¸Ã§Åø</string>
+    <string name="uyirvarukkam4">®ÅÐ Å¢Äì§¸ø</string>
+    <string name="uyirvarukkam5">¯¨¼ÂÐ Å¢Çõ§Àø</string>
+    <string name="uyirvarukkam6">°ì¸ÁÐ ¨¸Å¢§¼ø</string>
+    <string name="uyirvarukkam7">±ñ ±ØòÐ þ¸§Æø</string>
+    <string name="uyirvarukkam8">²üÀÐ þ¸úîº¢</string>
+    <string name="uyirvarukkam9">³Âõ þðÎ ¯ñ</string>
+    <string name="uyirvarukkam10">´ôÒÃ× ´ØÌ</string>
+    <string name="uyirvarukkam11">µÐÅÐ ´Æ¢§Âø</string>
+    <string name="uyirvarukkam12">¶Å¢Âõ §À§ºø</string>
+    <string name="uyirvarukkam13">«·¸õ ÍÕì§¸ø</string>
+    
+    <string name="uyirmeivarukkam1">¸ñ¦¼¡ýÚ ¦º¡ø§Äø</string>
+    <string name="uyirmeivarukkam2">¹ô §À¡ø Å¨Ç</string>
+    <string name="uyirmeivarukkam3">ºÉ¢ ¿£Ã¡Î</string>
+    <string name="uyirmeivarukkam4">»ÂõÀ¼ ¯¨Ã</string>
+    <string name="uyirmeivarukkam5">þ¼õÀ¼ Å£Î ±§¼ø</string>
+    <string name="uyirmeivarukkam6">þ½ì¸õ «È¢óÐ þ½íÌ</string>
+    <string name="uyirmeivarukkam7">¾ó¨¾ ¾¡öô §Àñ</string>
+    <string name="uyirmeivarukkam8">¿ýÈ¢ ÁÈ§Åø</string>
+    <string name="uyirmeivarukkam9">ÀÕÅò§¾ ÀÂ¢÷ ¦ºö</string>
+    <string name="uyirmeivarukkam10">Áñ ÀÈ¢òÐ ¯ñ§½ø</string>
+    <string name="uyirmeivarukkam11">þÂøÒ «Ä¡¾É ¦ºö§Âø</string>
+    <string name="uyirmeivarukkam12">«ÃÅõ ¬ð§¼ø</string>
+    <string name="uyirmeivarukkam13">þÄÅõ Àïº¢ø ÐÂ¢ø</string>
+    <string name="uyirmeivarukkam14">Åïº¸õ §À§ºø</string>
+    <string name="uyirmeivarukkam15">«ÆÌ «Ä¡¾É ¦ºö§Âø</string>
+    <string name="uyirmeivarukkam16">þÇ¨ÁÂ¢ø ¸ø</string>
+    <string name="uyirmeivarukkam17">«Ã¨É ÁÈ§Åø</string>
+    <string name="uyirmeivarukkam18">«Éó¾ø ¬§¼ø</string>
+    
+    <string name="kagaravarukkam1">¸ÊÅÐ ÁÈ</string>
+    <string name="kagaravarukkam2">¸¡ôÀÐ Å¢Ã¾õ</string>
+    <string name="kagaravarukkam3">¸¢Æ¨ÁôÀ¼ Å¡ú</string>
+    <string name="kagaravarukkam4">¸£ú¨Á «¸üÚ</string>
+    <string name="kagaravarukkam5">Ì½ÁÐ ¨¸Å¢§¼ø</string>
+    <string name="kagaravarukkam6">ÜÊô À¢Ã¢§Âø</string>
+    <string name="kagaravarukkam7">¦¸ÎôÀÐ ´Æ¢</string>
+    <string name="kagaravarukkam8">§¸ûÅ¢ ÓÂø</string>
+    <string name="kagaravarukkam9">¨¸Å¢¨É ¸Ã§Åø</string>
+    <string name="kagaravarukkam10">¦¸¡û¨Ç Å¢Õõ§Àø</string>
+    <string name="kagaravarukkam11">§¸¡¾¡ðÎ ´Æ¢</string>
+    <string name="kagaravarukkam12">¦¸ª¨Å «¸üÚ</string>
+    
+    <string name="sagaravarukkam1">ºì¸Ã ¦¿È¢ ¿¢ø</string>
+    <string name="sagaravarukkam2">º¡ý§È¡÷ þÉòÐ þÕ</string>
+    <string name="sagaravarukkam3">º¢ò¾¢Ãõ §À§ºø</string>
+    <string name="sagaravarukkam4">º£÷¨Á ÁÈ§Åø</string>
+    <string name="sagaravarukkam5">ÍÇ¢ì¸î ¦º¡ø§Äø</string>
+    <string name="sagaravarukkam6">ÝÐ Å¢Õõ§Àø</string>
+    <string name="sagaravarukkam7">¦ºöÅÉ ¾¢Õó¾î ¦ºö</string>
+    <string name="sagaravarukkam8">§ºÃ¢¼õ «È¢óÐ §º÷</string>
+    <string name="sagaravarukkam9">¨º¦ÂÉò ¾¢Ã¢§Âø</string>
+    <string name="sagaravarukkam10">¦º¡ü §º¡÷× À§¼ø</string>
+    <string name="sagaravarukkam11">§º¡õÀ¢ò ¾¢Ã¢§Âø</string>
+    
+    <string name="tagaravarukkam1">¾ì§¸¡ý ±Éò ¾¢Ã¢</string>
+    <string name="tagaravarukkam2">¾¡ÉÁÐ Å¢ÕõÒ</string>
+    <string name="tagaravarukkam3">¾¢ÕÁ¡ÖìÌ «Ê¨Á ¦ºö</string>
+    <string name="tagaravarukkam4">¾£Å¢¨É «¸üÚ</string>
+    <string name="tagaravarukkam5">ÐýÀò¾¢üÌ þ¼õ ¦¸¡§¼ø</string>
+    <string name="tagaravarukkam6">àì¸¢ Å¢¨É ¦ºö</string>
+    <string name="tagaravarukkam7">¦¾öÅõ þ¸§Æø</string>
+    <string name="tagaravarukkam8">§¾ºò§¾¡Î ´ðÊ Å¡ú</string>
+    <string name="tagaravarukkam9">¨¾Âø ¦º¡ø §¸§Çø</string>
+    <string name="tagaravarukkam10">¦¾¡ý¨Á ÁÈ§Åø</string>
+    <string name="tagaravarukkam11">§¾¡üÀÉ ¦¾¡¼§Ãø</string>
+    
+    <string name="nagaravarukkam1">¿ý¨Á ¸¨¼ôÀ¢Ê</string>
+    <string name="nagaravarukkam2">¿¡Î ´ôÀÉ ¦ºö</string>
+    <string name="nagaravarukkam3">¿¢¨ÄÂ¢ø À¢Ã¢§Âø</string>
+    <string name="nagaravarukkam4">¿£÷ Å¢¨ÇÂ¡§¼ø</string>
+    <string name="nagaravarukkam5">Ññ¨Á Ñ¸§Ãø</string>
+    <string name="nagaravarukkam6">áø ÀÄ ¸ø</string>
+    <string name="nagaravarukkam7">¦¿üÀÂ¢÷ Å¢¨Ç× ¦ºö</string>
+    <string name="nagaravarukkam8">§¿÷À¼ ´ØÌ</string>
+    <string name="nagaravarukkam9">¨¿Å¢¨É ¿Ï§¸ø</string>
+    <string name="nagaravarukkam10">¦¿¡öÂ ¯¨Ã§Âø</string>
+    <string name="nagaravarukkam11">§¿¡öìÌ þ¼õ ¦¸¡§¼ø</string>
+    
+    <string name="pagaravarukkam1">ÀÆ¢ôÀÉ À¸§Ãø</string>
+    <string name="pagaravarukkam2">À¡õ¦À¡Î ÀÆ§¸ø</string>
+    <string name="pagaravarukkam3">À¢¨ÆÀ¼î ¦º¡ø§Äø</string>
+    <string name="pagaravarukkam4">À£Î ¦ÀÈ ¿¢ø</string>
+    <string name="pagaravarukkam5">Ò¸úó¾¡¨Ãô §À¡üÈ¢ Å¡ú</string>
+    <string name="pagaravarukkam6">âÁ¢ ¾¢Õò¾¢ ¯ñ</string>
+    <string name="pagaravarukkam7">¦ÀÃ¢Â¡¨Ãò Ð¨½ì ¦¸¡û</string>
+    <string name="pagaravarukkam8">§À¨¾¨Á «¸üÚ</string>
+    <string name="pagaravarukkam9">¨ÀÂ§Ä¡Î þ½í§¸ø</string>
+    <string name="pagaravarukkam10">¦À¡Õû¾¨Éô §À¡üÈ¢ Å¡ú</string>
+    <string name="pagaravarukkam11">§À¡÷ò ¦¾¡Æ¢ø ÒÃ¢§Âø.</string>
+
+    <string name="magaravarukkam1">ÁÉõ ¾ÎÁ¡§Èø</string>
+    <string name="magaravarukkam2">Á¡üÈ¡ÛìÌ þ¼õ ¦¸¡§¼ø</string>
+    <string name="magaravarukkam3">Á¢¨¸À¼î ¦º¡ø§Äø</string>
+    <string name="magaravarukkam4">Á£àñ Å¢Õõ§Àø</string>
+    <string name="magaravarukkam5">Ó¨ÉÓ¸òÐ ¿¢ø§Äø</string>
+    <string name="magaravarukkam6">ã÷ì¸§Ã¡Î þ½í§¸ø</string>
+    <string name="magaravarukkam7">¦ÁøÄ¢ ¿øÄ¡û §¾¡û§º÷</string>
+    <string name="magaravarukkam8">§ÁýÁì¸û ¦º¡ø §¸û</string>
+    <string name="magaravarukkam9">¨Á Å¢Æ¢Â¡÷ Á¨É «¸ø</string>
+    <string name="magaravarukkam10">¦Á¡Æ¢ÅÐ «È ¦Á¡Æ¢</string>
+    <string name="magaravarukkam11">§Á¡¸ò¨¾ ÓÉ¢</string>
+
+    <string name="vagaravarukkam1">ÅøÄ¨Á §À§ºø</string>
+    <string name="vagaravarukkam2">Å¡Ð ÓüÜ§Èø</string>
+    <string name="vagaravarukkam3">Å¢ò¨¾ Å¢ÕõÒ</string>
+    <string name="vagaravarukkam4">Å£Î ¦ÀÈ ¿¢ø</string>
+    <string name="vagaravarukkam5">¯ò¾ÁÉ¡ö þÕ</string>
+    <string name="vagaravarukkam6">°Õ¼ý ÜÊ Å¡ú</string>
+    <string name="vagaravarukkam7">¦Åð¦¼Éô §À§ºø</string>
+    <string name="vagaravarukkam8">§ÅñÊ Å¢¨É ¦º§Âø</string>
+    <string name="vagaravarukkam9">¨Å¸¨Èò ÐÂ¢ø ±Ø</string>
+    <string name="vagaravarukkam10">´ýÉ¡¨Ãò §¾§Èø</string>
+    <string name="vagaravarukkam11">µÃõ ¦º¡ø§Äø</string>
+    
+</resources>

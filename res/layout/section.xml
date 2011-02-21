@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+<TextView  
+	android:id="@+id/tamilFont"
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content" 
+    android:text="@string/hello"
+    />
+<TableLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@+id/tableLayout1">
+    <TableRow android:id="@+id/tableRow1" style="@style/chudi">
+        <TextView android:text="1. «Èõ ¦ºÂ Å¢ÕõÒ." android:id="@+id/textView1"></TextView>
+    </TableRow>
+    <TableRow android:id="@+id/tableRow2" style="@style/chudi">
+        <TextView android:text="2. ¬ÚÅÐ º¢Éõ." android:id="@+id/textView2"></TextView>
+    </TableRow>
+</TableLayout>
+</LinearLayout>
