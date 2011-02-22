@@ -14,7 +14,7 @@ public class Util {
 	public Util(Context context, AssetManager asset) {
 		this.context = context;
 		this.asset = asset;
-		tf = Typeface.createFromAsset(asset, "fonts/TSC_Mylai.ttf");
+		tf = Typeface.createFromAsset(asset, "fonts/TSC_Comic.ttf");
 	}
 	
 	
