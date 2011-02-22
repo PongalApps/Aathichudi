@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Aathichudi</string>
+    <string name="header">¬ò¾¢ ÝÊ</string>
     <string name="hello">¬ò¾¢ ÝÊ «Á÷ó¾ §¾Å¨É ²ò¾¢ ²ò¾¢ò ¦¾¡Ø§Å¡õ Â¡§Á.</string>
     
     <!-- Sections  -->

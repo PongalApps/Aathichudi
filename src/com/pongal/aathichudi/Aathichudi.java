@@ -8,22 +8,32 @@ import android.app.Activity;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.LinearLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
 public class Aathichudi extends Activity {
 	
-	private SectionView mainView;
+	private SectionView tableView;
+	private Util util;
+	private TextView header;
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splashscreen);
-        
-        mainView = new SectionView(getApplicationContext(), getAssets());
-        renderMainView();
+        util = new Util(getApplicationContext(), getAssets());
+        LinearLayout mainView = new LinearLayout(getApplicationContext());
+		mainView.setOrientation(LinearLayout.VERTICAL);
+		header = getHeader();
+		mainView.addView(header);
+        tableView = new SectionView(getApplicationContext(), getAssets());
+		mainView.addView(tableView);
+        renderHomePage();
+        setContentView(mainView);
     }
 
 	private OnClickListener getSectionListener() {		
@@ -31,33 +41,44 @@ public class Aathichudi extends Activity {
 			@Override
 			public void onClick(View v) {
 				SectionInfo info = (SectionInfo)v.getTag();
-				mainView.addRows(info.startIndex, info.count, null, null);
+				header.setText(info.group);
+				tableView.addRows(info.startIndex, info.count, null, null);
 			}
 		};
 	}
 
 	private List<SectionInfo> getSectionRowIdentifiers() {
 		List<SectionInfo> identifiers = new ArrayList<SectionInfo>();
-		identifiers.add(new SectionInfo(R.string.uyirvarukkam1, 13));
-		identifiers.add(new SectionInfo(R.string.uyirmeivarukkam1, 18));
-		identifiers.add(new SectionInfo(R.string.kagaravarukkam1, 12));
-		identifiers.add(new SectionInfo(R.string.sagaravarukkam1, 11));
-		identifiers.add(new SectionInfo(R.string.tagaravarukkam1, 11));
-		identifiers.add(new SectionInfo(R.string.nagaravarukkam1, 11));
-		identifiers.add(new SectionInfo(R.string.pagaravarukkam1, 11));
-		identifiers.add(new SectionInfo(R.string.magaravarukkam1, 11));
-		identifiers.add(new SectionInfo(R.string.vagaravarukkam1, 11));
+		identifiers.add(new SectionInfo(R.string.section1, R.string.uyirvarukkam1, 13));
+		identifiers.add(new SectionInfo(R.string.section2, R.string.uyirmeivarukkam1, 18));
+		identifiers.add(new SectionInfo(R.string.section3, R.string.kagaravarukkam1, 12));
+		identifiers.add(new SectionInfo(R.string.section4, R.string.sagaravarukkam1, 11));
+		identifiers.add(new SectionInfo(R.string.section5, R.string.tagaravarukkam1, 11));
+		identifiers.add(new SectionInfo(R.string.section6, R.string.nagaravarukkam1, 11));
+		identifiers.add(new SectionInfo(R.string.section7, R.string.pagaravarukkam1, 11));
+		identifiers.add(new SectionInfo(R.string.section8, R.string.magaravarukkam1, 11));
+		identifiers.add(new SectionInfo(R.string.section9, R.string.vagaravarukkam1, 11));
 		return identifiers;
 	}
 
 	@Override
 	public void onBackPressed() {
-		renderMainView();
+		renderHomePage();
 	}
 
-	private void renderMainView() {
-		mainView.addRows(R.string.section1, 9, getSectionListener(), getSectionRowIdentifiers());
-		setContentView(mainView);
+	private void renderHomePage() {
+		header.setText(R.string.header);
+		tableView.addRows(R.string.section1, 9, getSectionListener(), getSectionRowIdentifiers());
+		
+	}
+
+	private TextView getHeader() {
+		TextView header = util.createTamilTextView(0xFFFFFFFF, 22);
+		header.setText(R.string.header);
+		header.setBackgroundResource(R.layout.headerbg);
+		header.setPadding(5, 5, 5, 5);	
+		header.setGravity(Gravity.CENTER);
+		return header;
 	}
 
 	@Override
