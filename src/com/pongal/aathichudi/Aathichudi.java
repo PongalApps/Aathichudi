@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import com.pongal.aathichudi.db.DBManager;
+
 import android.app.Activity;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -20,16 +22,20 @@ public class Aathichudi extends Activity {
 	private SectionView tableView;
 	private Util util;
 	private TextView header;
+	private DBManager manager;
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splashscreen);
+        manager = new DBManager(getApplicationContext());
+        Item item = manager.getRow(10);
         util = new Util(getApplicationContext(), getAssets());
         LinearLayout mainView = new LinearLayout(getApplicationContext());
 		mainView.setOrientation(LinearLayout.VERTICAL);
 		header = getHeader();
 		mainView.addView(header);
+		Log.d(null, item.id + " " + item.text + " " + item.group_id + " " + item.shortDescription);
         tableView = new SectionView(getApplicationContext(), getAssets());
 		mainView.addView(tableView);
         renderHomePage();
