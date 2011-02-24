@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.pongal.aathichudi.db.DBManager;
+import com.pongal.aathichudi.model.MaximRow;
 
 import android.app.Activity;
 import android.graphics.Typeface;
@@ -27,9 +28,8 @@ public class Aathichudi extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.splashscreen);
         manager = new DBManager(getApplicationContext());
-        Item item = manager.getRow(10);
+        MaximRow item = manager.getRow(10);
         util = new Util(getApplicationContext(), getAssets());
         LinearLayout mainView = new LinearLayout(getApplicationContext());
 		mainView.setOrientation(LinearLayout.VERTICAL);
