@@ -18,9 +18,9 @@ public class Util {
 	}
 	
 	
-	public TextView createTamilTextView(int color, int size) {
+	public TextView createTamilTextView(int color, int size, int style) {
 		TextView textView = new TextView(context);
-		textView.setTypeface(tf);
+		textView.setTypeface(tf, style);
 		textView.setTextColor(color);
 		textView.setTextSize(size);
 		return textView;

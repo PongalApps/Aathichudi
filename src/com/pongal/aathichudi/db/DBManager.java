@@ -1,62 +1,60 @@
 package com.pongal.aathichudi.db;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.pongal.aathichudi.model.Item;
-import com.pongal.aathichudi.model.MaximRow;
-
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+
+import com.pongal.aathichudi.model.Item;
+import com.pongal.aathichudi.model.MaximRow;
 
 public class DBManager {
 	Context context;
-	private SQLiteDatabase db;
 
 	public DBManager(Context context) {
-		this.context = context;
+		this.context = context;		
 	}
 
-	public MaximRow getContents() {
+	public Item getContents() {
 		List<MaximRow> rows = getItems();
+		Log.d(null, "Size" + rows.size());
 		Map<Integer, Item> refMap = new HashMap<Integer, Item>();
 		for(MaximRow row : rows) {
-			Item item = new Item(row);
-			refMap.put(row.id, item);
-			if(row.group_id != null) {
+			refMap.put(row.id, new Item(row));
+		}
+		Item root = null;
+		for(MaximRow row : rows){
+			Item currItem = refMap.get(row.id);
+			if(row.group_id != 0) {
 				Item parent = refMap.get(row.group_id);
-				parent.addChild(item);
+				parent.addChild(currItem);
+			} else {
+				root = currItem;
 			}
 		}
-		return null;
+		return root;
 	}
 
-	private List<MaximRow> getItems() {
+	List<MaximRow> getItems() {
+		DBHelper helper = new DBHelper(context);
+		SQLiteDatabase db =  helper.openDatabase();
 		List<MaximRow> items = new ArrayList<MaximRow>();
 		Cursor cursor;
 		try {
 			cursor = db.query("contents", new String[] { "id", "text",
 					"shortDesc", "group_id" }, null, null, null, null, null,
 					null);
-//			cursor.moveToFirst();
 
-			do {
+			while (cursor.moveToNext()) {
 				items.add(new MaximRow(cursor.getInt(0), cursor.getString(1),
 						cursor.getString(2), cursor.getInt(3)));
-			} while (cursor.moveToNext());
+			}
 			cursor.close();
 
 		} catch (SQLException e) {
