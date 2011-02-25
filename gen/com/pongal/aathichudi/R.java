@@ -157,5 +157,7 @@ public final class R {
     }
     public static final class style {
         public static final int chudi=0x7f050000;
+        public static final int devs=0x7f050001;
+        public static final int support=0x7f050002;
     }
 }

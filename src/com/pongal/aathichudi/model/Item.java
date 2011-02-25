@@ -1,9 +1,11 @@
 package com.pongal.aathichudi.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Item {
+public class Item implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private Item parent;
 	private List<Item> children = new ArrayList<Item>();
 	private String text;

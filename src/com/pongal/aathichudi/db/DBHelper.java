@@ -33,7 +33,6 @@ public class DBHelper extends SQLiteOpenHelper {
 		}
 		return SQLiteDatabase.openDatabase(DB_PATH + DB_NAME, null, SQLiteDatabase.OPEN_READONLY);
 	}
-
 		
 	private boolean checkDataBase() {
 		SQLiteDatabase checkDB = null;

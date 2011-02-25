@@ -44,6 +44,7 @@ public class DBManager {
 	List<MaximRow> getItems() {
 		DBHelper helper = new DBHelper(context);
 		SQLiteDatabase db =  helper.openDatabase();
+		helper.close();
 		List<MaximRow> items = new ArrayList<MaximRow>();
 		Cursor cursor;
 		try {
@@ -61,7 +62,7 @@ public class DBManager {
 			Log.d("DB ERROR", e.toString());
 			e.printStackTrace();
 		}
+		db.close();
 		return items;
 	}
-
 }
