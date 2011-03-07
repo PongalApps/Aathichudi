@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 public class Util {
 
-	private static Typeface tf;
+	static Typeface tf;
 	private Context context;
 	private AssetManager asset;
 

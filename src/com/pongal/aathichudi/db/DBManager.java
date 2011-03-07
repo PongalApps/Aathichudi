@@ -16,9 +16,14 @@ import com.pongal.aathichudi.model.MaximRow;
 
 public class DBManager {
 	Context context;
+	private DBHelper helper;
+	private SQLiteDatabase db;
 
 	public DBManager(Context context) {
-		this.context = context;		
+		this.context = context;
+		helper = new DBHelper(context);
+		db = helper.openDatabase();
+		helper.close();
 	}
 
 	public Item getContents() {
@@ -42,9 +47,6 @@ public class DBManager {
 	}
 
 	List<MaximRow> getItems() {
-		DBHelper helper = new DBHelper(context);
-		SQLiteDatabase db =  helper.openDatabase();
-		helper.close();
 		List<MaximRow> items = new ArrayList<MaximRow>();
 		Cursor cursor;
 		try {
@@ -55,6 +57,28 @@ public class DBManager {
 			while (cursor.moveToNext()) {
 				items.add(new MaximRow(cursor.getInt(0), cursor.getString(1),
 						cursor.getString(2), cursor.getInt(3)));
+			}
+			cursor.close();
+
+		} catch (SQLException e) {
+			Log.d("DB ERROR", e.toString());
+			e.printStackTrace();
+		}
+		db.close();
+		return items;
+	}
+
+	public List<MaximRow> getMaxims() {
+		List<MaximRow> items = new ArrayList<MaximRow>();
+		Cursor cursor;
+		try {
+			cursor = db.query("contents", new String[] { "text",
+					"shortDesc"}, "shortDesc != ''", null, null, null, null,
+					null);
+
+			while (cursor.moveToNext()) {
+				items.add(new MaximRow(null, cursor.getString(0),
+						cursor.getString(1), null));
 			}
 			cursor.close();
 
