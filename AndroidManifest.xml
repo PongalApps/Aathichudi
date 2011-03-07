@@ -2,15 +2,24 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 	package="com.pongal.aathichudi" android:versionCode="5"
 	android:versionName="2.1">
-	<uses-sdk android:minSdkVersion="7"/>
+	<uses-sdk android:minSdkVersion="7" />
 	<application android:icon="@drawable/icon" android:label="@string/app_name"
 		android:debuggable="false" android:theme="@android:style/Theme.Light.NoTitleBar">
-		<activity android:label="@string/app_name" android:name="Aathichudi" android:stateNotNeeded="false" ></activity>
+		<activity android:label="@string/app_name" android:name="Aathichudi"
+			android:stateNotNeeded="false"></activity>
 		<activity android:name="SplashScreenActivity">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
 		</activity>
+		<receiver android:name="AathichudiAppWidgetProvider">
+			<intent-filter>
+				<action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+			</intent-filter>
+			<meta-data android:name="android.appwidget.provider"
+				android:resource="@xml/example_appwidget_info" />
+		</receiver>
 	</application>
+
 </manifest>
