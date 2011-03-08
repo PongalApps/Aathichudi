@@ -3,10 +3,10 @@ package com.pongal.aathichudi;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.Typeface;
-import android.text.GetChars;
-import android.view.Gravity;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TableLayout;
@@ -16,28 +16,37 @@ import com.pongal.aathichudi.model.Item;
 
 public class MaximViewer extends LinearLayout {
 
-	private TextView header;
 	private TableLayout table;
 	private Util util;
 	private ScrollView scrollView;
+	private HeaderView header;
 
 	public MaximViewer(Context context, AssetManager asset) {
 		super(context);
 		setOrientation(LinearLayout.VERTICAL);
 		util = new Util(context, asset);
-		header = getHeader();
+		header = new HeaderView(context, util, navigationHandler());
 		scrollView = new ScrollView(context);
 		table = new TableLayout(context);
 		scrollView.addView(table);
 		addView(header);
 		addView(scrollView);
 	}
+	
+	private OnClickListener navigationHandler() {
+		return new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				render((Item) v.getTag());
+			}
+		};
+	}
 
 	public void render(Item item) {
 		setTag(item);
 		table.removeAllViews();
 		scrollView.scrollTo(0, 0);
-		header.setText(item.getText());
+		header.render(item);
 		for (Item child : item.getChildren()) {
 			table.addView(getRowView(child));
 		}
@@ -59,7 +68,8 @@ public class MaximViewer extends LinearLayout {
 		rowLayout.addView(textView);
 
 		if (!item.getChildren().isEmpty()) {
-			TextView arrow = util.createTamilTextView(0xFF000000, 18, Typeface.NORMAL);
+			TextView arrow = util.createTamilTextView(0xFF000000, 18,
+					Typeface.NORMAL);
 			arrow.setText(">");
 			rowLayout.addView(arrow);
 			wrapper.setOnClickListener(getClickListener());
@@ -72,7 +82,8 @@ public class MaximViewer extends LinearLayout {
 		wrapper.addView(rowLayout);
 
 		if (item.hasShortDesc()) {
-			TextView desc = util.createTamilTextView(0xFF000000, 14, Typeface.NORMAL);
+			TextView desc = util.createTamilTextView(0xFF000000, 14,
+					Typeface.NORMAL);
 			desc.setText(item.getShortDesc());
 			wrapper.addView(desc);
 		}
@@ -113,13 +124,5 @@ public class MaximViewer extends LinearLayout {
 		row.setPadding(10, 10, 10, 10);
 	}
 
-	private TextView getHeader() {
-		TextView header = util.createTamilTextView(0xFFFFFFFF, 22, Typeface.BOLD);
-		header.setText(R.string.header);
-		header.setBackgroundResource(R.layout.headerbg);
-		header.setPadding(5, 5, 5, 5);
-		header.setGravity(Gravity.CENTER);
-		return header;
-	}
 
 }
