@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TextView;
+import static android.widget.LinearLayout.LayoutParams.*;
 
 import com.pongal.aathichudi.model.Item;
 
@@ -21,10 +22,10 @@ public class MaximViewer extends LinearLayout {
 	private ScrollView scrollView;
 	private HeaderView header;
 
-	public MaximViewer(Context context, AssetManager asset) {
+	public MaximViewer(Context context) {
 		super(context);
 		setOrientation(LinearLayout.VERTICAL);
-		util = new Util(context, asset);
+		util = new Util(context);
 		header = new HeaderView(context, util, navigationHandler());
 		scrollView = new ScrollView(context);
 		table = new TableLayout(context);
@@ -63,8 +64,7 @@ public class MaximViewer extends LinearLayout {
 		int textStyle = item.hasShortDesc() ? Typeface.BOLD : Typeface.NORMAL;
 		TextView textView = util.createTamilTextView(0xFF000000, 18, textStyle);
 		textView.setText(item.getText());
-		textView.setLayoutParams(new LinearLayout.LayoutParams(
-				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, 1));
+		textView.setLayoutParams(new LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT, 1));
 		rowLayout.addView(textView);
 
 		if (!item.getChildren().isEmpty()) {
@@ -119,8 +119,7 @@ public class MaximViewer extends LinearLayout {
 
 	private void setRowStyle(LinearLayout row) {
 		row.setBackgroundResource(R.layout.cellbg);
-		row.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
-				LayoutParams.FILL_PARENT));
+		row.setLayoutParams(new LayoutParams(FILL_PARENT, FILL_PARENT));
 		row.setPadding(10, 10, 10, 10);
 	}
 

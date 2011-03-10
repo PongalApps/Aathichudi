@@ -19,10 +19,14 @@ public class Aathichudi extends Activity {
 			currentNode = (Item) savedInstanceState.getSerializable("data");
 		} else {
 			DBManager manager = new DBManager(getApplicationContext());
-			currentNode = manager.getContents();
+			if (getIntent().hasExtra("groupId")) {
+				currentNode = manager.getNode(getIntent().getExtras().getInt(
+						"groupId"));
+			} else
+				currentNode = manager.getContents();
 		}
 
-		maximViewer = new MaximViewer(getApplicationContext(), getAssets());
+		maximViewer = new MaximViewer(getApplicationContext());
 		maximViewer.render(currentNode);
 		setContentView(maximViewer);
 	}
@@ -41,7 +45,6 @@ public class Aathichudi extends Activity {
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-		Log.d(null, "Onsaved instance state: " + maximViewer.getItem());
 		outState.putSerializable("data", maximViewer.getItem());
 	}
 }

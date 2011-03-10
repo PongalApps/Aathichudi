@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="fill_parent"
-  android:layout_height="wrap_content" android:orientation="vertical" android:background="@layout/cellbg">
-    <ImageView android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/maximImage" android:paddingLeft="10sp" android:paddingRight="10sp" android:paddingTop="10sp" android:paddingBottom="0sp"></ImageView>
-    <ImageView android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/descriptionImage" android:paddingLeft="10sp" android:paddingBottom="10sp"></ImageView>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="fill_parent"
+	android:paddingLeft="10sp" android:paddingRight="10sp"
+	android:background="@layout/app_widget_bg">
+	<ImageView android:paddingRight="10sp" android:layout_width="wrap_content"
+		android:id="@+id/maximImage" android:layout_height="wrap_content"
+		android:paddingLeft="10sp" android:paddingTop="5sp" android:layout_gravity="center_vertical|center_horizontal"></ImageView>
 </LinearLayout>

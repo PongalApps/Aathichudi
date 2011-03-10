@@ -13,4 +13,7 @@ public class MaximRow {
 		this.group_id = group_id;
 	}
 
+	public MaximRow() {
+	}
+
 }

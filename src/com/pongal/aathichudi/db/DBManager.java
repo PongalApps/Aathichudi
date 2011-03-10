@@ -27,16 +27,15 @@ public class DBManager {
 	}
 
 	public Item getContents() {
-		List<MaximRow> rows = getItems();
-		Log.d(null, "Size" + rows.size());
+		List<MaximRow> rows = getItems(null);
 		Map<Integer, Item> refMap = new HashMap<Integer, Item>();
-		for(MaximRow row : rows) {
+		for (MaximRow row : rows) {
 			refMap.put(row.id, new Item(row));
 		}
 		Item root = null;
-		for(MaximRow row : rows){
+		for (MaximRow row : rows) {
 			Item currItem = refMap.get(row.id);
-			if(row.group_id != 0) {
+			if (row.group_id != 0) {
 				Item parent = refMap.get(row.group_id);
 				parent.addChild(currItem);
 			} else {
@@ -46,13 +45,13 @@ public class DBManager {
 		return root;
 	}
 
-	List<MaximRow> getItems() {
+	List<MaximRow> getItems(String selectionString) {
 		List<MaximRow> items = new ArrayList<MaximRow>();
 		Cursor cursor;
 		try {
 			cursor = db.query("contents", new String[] { "id", "text",
-					"shortDesc", "group_id" }, null, null, null, null, null,
-					null);
+					"shortDesc", "group_id" }, selectionString, null, null,
+					null, null, null);
 
 			while (cursor.moveToNext()) {
 				items.add(new MaximRow(cursor.getInt(0), cursor.getString(1),
@@ -69,24 +68,30 @@ public class DBManager {
 	}
 
 	public List<MaximRow> getMaxims() {
-		List<MaximRow> items = new ArrayList<MaximRow>();
-		Cursor cursor;
-		try {
-			cursor = db.query("contents", new String[] { "text",
-					"shortDesc"}, "shortDesc != ''", null, null, null, null,
-					null);
+		return getItems("shortDesc != ''");
+	}
 
-			while (cursor.moveToNext()) {
-				items.add(new MaximRow(null, cursor.getString(0),
-						cursor.getString(1), null));
-			}
+	public Item getNode(Integer groupId) {
+		MaximRow category = new MaximRow();
+		try {
+			Cursor cursor = db.query("contents", new String[] { "id", "text",
+							"shortDesc", "group_id" }, "id = ?",
+							new String[] { groupId.toString() }, null, null,
+							null, null);
+			cursor.moveToNext();
+			category = new MaximRow(cursor.getInt(0), cursor.getString(1),
+					cursor.getString(2), cursor.getInt(3));
 			cursor.close();
 
 		} catch (SQLException e) {
 			Log.d("DB ERROR", e.toString());
 			e.printStackTrace();
 		}
-		db.close();
-		return items;
+		Item root = getContents();
+		for (Item child : root.getChildren()) {
+			if (child.getText().equals(category.text))
+				return child;
+		}
+		return root;
 	}
 }

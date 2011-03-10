@@ -9,12 +9,10 @@ public class Util {
 
 	static Typeface tf;
 	private Context context;
-	private AssetManager asset;
 
-	public Util(Context context, AssetManager asset) {
+	public Util(Context context) {
 		this.context = context;
-		this.asset = asset;
-		tf = Typeface.createFromAsset(asset, "fonts/TSC_Comic.ttf");
+		tf = Typeface.createFromAsset(context.getAssets(), "fonts/TSC_Comic.ttf");
 	}
 	
 	

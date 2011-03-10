@@ -1,29 +1,24 @@
 package com.pongal.aathichudi;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
+import static android.view.View.MeasureSpec.UNSPECIFIED;
+import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
-import com.pongal.aathichudi.db.DBManager;
-import com.pongal.aathichudi.model.MaximRow;
+import java.util.ArrayList;
+import java.util.List;
 
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.AssetManager;
-import android.graphics.Bitmap;
 import android.graphics.Typeface;
-import android.text.InputType;
-import android.util.Log;
-import android.view.View;
 import android.view.View.MeasureSpec;
-import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.RemoteViews;
 import android.widget.TextView;
-import android.widget.LinearLayout.LayoutParams;
+
+import com.pongal.aathichudi.db.DBManager;
+import com.pongal.aathichudi.model.MaximRow;
 
 public class AathichudiAppWidgetProvider extends AppWidgetProvider {
 	private static List<MaximRow> maxims = new ArrayList<MaximRow>();
@@ -36,36 +31,29 @@ public class AathichudiAppWidgetProvider extends AppWidgetProvider {
 		}
 		MaximRow maximRow = maxims.get(currentItem % maxims.size());
 		currentItem++;
-		RemoteViews views = new RemoteViews(context.getPackageName(),
-				R.layout.appwidget);
-		TextView textView = createTextView(context, maximRow.text, 18);
-		textView.measure(MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED),
-				MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
-		textView.layout(0, 0, textView.getMeasuredWidth(),
-				textView.getMeasuredHeight());
-		TextView descView = createTextView(context, maximRow.shortDescription, 14);
-		descView.measure(MeasureSpec.makeMeasureSpec(320, MeasureSpec.EXACTLY),
-				MeasureSpec.makeMeasureSpec(30, MeasureSpec.EXACTLY));
-		descView.layout(0, 0, descView.getMeasuredWidth(),
-				descView.getMeasuredHeight());
+		RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.appwidget);
+		TextView textView = createTextView(context, maximRow.text);
+		
 		views.setImageViewBitmap(R.id.maximImage, textView.getDrawingCache());
-		views.setImageViewBitmap(R.id.descriptionImage, descView.getDrawingCache());
 		
 		for (int appWidgetId : appWidgetIds) {
+			Intent intent = new Intent(context, Aathichudi.class);
+			intent.putExtra("groupId", maximRow.group_id);
+            PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            views.setOnClickPendingIntent(R.id.maximImage, pendingIntent);
 			appWidgetManager.updateAppWidget(appWidgetId, views);
 		}
 	}
 
-	private TextView createTextView(Context context, String text, int size) {
-		TextView textView = new TextView(context);
-		textView.setTypeface(Util.tf);
+	private TextView createTextView(Context context, String text) {
+		TextView textView = new Util(context).createTamilTextView(0xFFFFFFFF, 25, Typeface.NORMAL);
 		textView.setText(text);
-		textView.setTextColor(0xFF000000);
-		textView.setTextSize(size);
-		textView.setLayoutParams(new LayoutParams(
-				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+		textView.setLayoutParams(new LayoutParams(WRAP_CONTENT, WRAP_CONTENT));
 		textView.setDrawingCacheEnabled(true);
-		
+		textView.measure(MeasureSpec.makeMeasureSpec(0, UNSPECIFIED),
+				MeasureSpec.makeMeasureSpec(0, UNSPECIFIED));
+		textView.layout(0, 0, textView.getMeasuredWidth(),
+				textView.getMeasuredHeight());
 		return textView;
 	}
 
