@@ -12,6 +12,7 @@ import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.View.MeasureSpec;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.RemoteViews;
@@ -26,6 +27,7 @@ public class AathichudiAppWidgetProvider extends AppWidgetProvider {
 
 	public void onUpdate(Context context, AppWidgetManager appWidgetManager,
 			int[] appWidgetIds) {
+		Log.d("aathichudi", "Update received: ");
 		if(maxims.size() == 0){
 			maxims = new DBManager(context).getMaxims();
 		}

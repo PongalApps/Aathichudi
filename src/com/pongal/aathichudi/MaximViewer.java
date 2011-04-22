@@ -3,10 +3,13 @@ package com.pongal.aathichudi;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.Typeface;
+import android.media.MediaPlayer;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TableLayout;
@@ -21,9 +24,11 @@ public class MaximViewer extends LinearLayout {
 	private Util util;
 	private ScrollView scrollView;
 	private HeaderView header;
+	private final Context context;
 
 	public MaximViewer(Context context) {
 		super(context);
+		this.context = context;
 		setOrientation(LinearLayout.VERTICAL);
 		util = new Util(context);
 		header = new HeaderView(context, util, navigationHandler());
@@ -43,7 +48,29 @@ public class MaximViewer extends LinearLayout {
 		};
 	}
 
-	public void render(Item item) {
+	public void render(final Item item) {
+		Animation makeOutAnimation = AnimationUtils.makeOutAnimation(context, false);
+		makeOutAnimation.setDuration(1000L);
+		makeOutAnimation.setAnimationListener(new Animation.AnimationListener() {
+			
+			@Override
+			public void onAnimationStart(Animation animation) {}
+			
+			@Override
+			public void onAnimationRepeat(Animation animation) {}
+			
+			@Override
+			public void onAnimationEnd(Animation animation) {
+				Animation makeInAnimation = AnimationUtils.makeInAnimation(context, false);
+				makeInAnimation.setDuration(1000L);
+				startAnimation(makeInAnimation);
+				someMethod(item);
+			}
+		});
+		startAnimation(makeOutAnimation);
+	}
+	
+	public void someMethod(Item item){
 		setTag(item);
 		table.removeAllViews();
 		scrollView.scrollTo(0, 0);
