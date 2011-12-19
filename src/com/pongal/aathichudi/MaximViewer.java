@@ -1,20 +1,17 @@
 package com.pongal.aathichudi;
 
+import static android.view.ViewGroup.LayoutParams.FILL_PARENT;
+import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 import android.content.Context;
-import android.content.res.AssetManager;
 import android.graphics.Typeface;
-import android.media.MediaPlayer;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TextView;
-import static android.widget.LinearLayout.LayoutParams.*;
 
 import com.pongal.aathichudi.model.Item;
 
@@ -41,7 +38,6 @@ public class MaximViewer extends LinearLayout {
 	
 	private OnClickListener navigationHandler() {
 		return new View.OnClickListener() {
-			@Override
 			public void onClick(View v) {
 				render((Item) v.getTag());
 			}
@@ -53,13 +49,10 @@ public class MaximViewer extends LinearLayout {
 		makeOutAnimation.setDuration(1000L);
 		makeOutAnimation.setAnimationListener(new Animation.AnimationListener() {
 			
-			@Override
 			public void onAnimationStart(Animation animation) {}
 			
-			@Override
 			public void onAnimationRepeat(Animation animation) {}
 			
-			@Override
 			public void onAnimationEnd(Animation animation) {
 				Animation makeInAnimation = AnimationUtils.makeInAnimation(context, false);
 				makeInAnimation.setDuration(1000L);
@@ -120,7 +113,6 @@ public class MaximViewer extends LinearLayout {
 
 	private OnClickListener getClickListener() {
 		return new OnClickListener() {
-			@Override
 			public void onClick(View v) {
 				render((Item) v.getTag());
 			}
@@ -129,7 +121,6 @@ public class MaximViewer extends LinearLayout {
 
 	private OnTouchListener getHighlightListener() {
 		return new OnTouchListener() {
-			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				if (event.getAction() == MotionEvent.ACTION_DOWN
 						|| event.getAction() == MotionEvent.ACTION_MOVE) {
