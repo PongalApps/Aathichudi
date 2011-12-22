@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent" android:layout_height="fill_parent"
-	android:paddingLeft="10sp" android:paddingRight="10sp" android:paddingTop="20sp" android:paddingBottom="20sp">
-	<LinearLayout android:layout_width="fill_parent"
-	android:layout_height="fill_parent" android:id="@+id/linearLayout1"
-	android:background="@layout/layer_list">
-		<ImageView android:padding="10sp" android:layout_width="wrap_content"
-			android:id="@+id/maximImage" android:layout_height="fill_parent"
-			android:layout_gravity="center_vertical|center_horizontal"></ImageView>
+	android:paddingLeft="5sp" android:paddingRight="5sp" android:paddingTop="5sp" android:paddingBottom="5sp">
 
+	<LinearLayout
+	    android:id="@+id/linearLayout1"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:background="@layout/layer_list"
+	    android:orientation="vertical" >
+
+		<ImageView android:padding="10sp" android:layout_width="wrap_content"
+			android:id="@+id/maximImage" android:layout_height="wrap_content"
+			android:layout_gravity="top|left"></ImageView>
+
+		<ImageView android:id="@+id/maximDesc" android:layout_width="fill_parent"
+		    android:layout_height="fill_parent" android:padding="10sp" 
+		    android:layout_gravity="bottom|left"></ImageView>
 	</LinearLayout>
 </LinearLayout>

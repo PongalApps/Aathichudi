@@ -1,7 +1,6 @@
 package com.pongal.aathichudi;
 
 import static android.view.View.MeasureSpec.UNSPECIFIED;
-import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +16,6 @@ import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Typeface;
-import android.util.Log;
 import android.view.View.MeasureSpec;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.RemoteViews;
@@ -31,16 +29,17 @@ public class AathichudiAppWidgetProvider extends AppWidgetProvider {
 
 	public void onUpdate(Context context, AppWidgetManager appWidgetManager,
 			int[] appWidgetIds) {
-		Log.d("aathichudi", "Update received: ");
 		if(maxims.size() == 0){
 			maxims = new DBManager(context).getMaxims();
 		}
 		Random maximNumber = new Random();
-		MaximRow maximRow = maxims.get(maximNumber.nextInt(109) + 1);
+		MaximRow maximRow = maxims.get(maximNumber.nextInt(108) + 1);
 		RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.appwidget);
-		Bitmap textView = createTextView(context, maximRow.text);
+		Bitmap textView = createTextImage(context, maximRow.text, 20);
+		Bitmap description = createTextImage(context, maximRow.shortDescription, 12);
 		
 		views.setImageViewBitmap(R.id.maximImage, textView);
+		views.setImageViewBitmap(R.id.maximDesc, description);
 		
 		for (int appWidgetId : appWidgetIds) {
 			Intent intent = new Intent(context, Aathichudi.class);
@@ -51,21 +50,22 @@ public class AathichudiAppWidgetProvider extends AppWidgetProvider {
 		}
 	}
 
-	private Bitmap createTextView(Context context, String text) {
-		TextView textView = new Util(context).createTamilTextView(0xFFFFFFFF, 25, Typeface.NORMAL);
+	private Bitmap createTextImage(Context context, String text, int textSize) {
+		Util util = new Util(context);
+		TextView textView = util.createTamilTextView(0xFFFFFFFF, textSize, Typeface.NORMAL);
 		textView.setText(text);
-		textView.setLayoutParams(new LayoutParams(WRAP_CONTENT, WRAP_CONTENT));
+		textView.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
 		textView.setDrawingCacheEnabled(true);
-		textView.measure(MeasureSpec.makeMeasureSpec(0, UNSPECIFIED),
+		int maxWidth = util.getDIP(290); 
+		textView.measure(MeasureSpec.makeMeasureSpec(maxWidth, MeasureSpec.EXACTLY),
 				MeasureSpec.makeMeasureSpec(0, UNSPECIFIED));
-		textView.layout(0, 0, textView.getMeasuredWidth(),
-				textView.getMeasuredHeight());
+		textView.layout(0, 0, textView.getMeasuredWidth(), textView.getMeasuredHeight());
 		Bitmap proxy = Bitmap.createBitmap(textView.getWidth(), textView.getHeight(), Config.ARGB_8888);
 		Canvas c = new Canvas(proxy);
 		c.drawBitmap(textView.getDrawingCache(), new Matrix(), null);
 		return proxy.copy(Config.ARGB_8888, true);
 	}
-
+	
 	@Override
 	public void onEnabled(Context context) {
 		super.onEnabled(context);

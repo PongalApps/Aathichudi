@@ -1,7 +1,9 @@
 package com.pongal.aathichudi;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Typeface;
+import android.util.TypedValue;
 import android.widget.TextView;
 
 public class Util {
@@ -21,5 +23,10 @@ public class Util {
 		textView.setTextColor(color);
 		textView.setTextSize(size);
 		return textView;
+	}
+	
+	public int getDIP(int pixels) {
+		return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 
+                (float) pixels, context.getResources().getDisplayMetrics());
 	}
 }
