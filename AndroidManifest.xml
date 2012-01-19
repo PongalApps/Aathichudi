@@ -1,25 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-	package="com.pongal.aathichudi" android:versionCode="7"
-	android:versionName="2.3">
-	<uses-sdk android:minSdkVersion="7" />
-	<application android:icon="@drawable/icon" android:label="@string/app_name"
-		android:debuggable="false" android:theme="@android:style/Theme.Light.NoTitleBar" android:enabled="true" android:persistent="true" android:hasCode="true" android:allowClearUserData="true">
-		<activity android:label="@string/app_name" android:name="Aathichudi"
-			android:stateNotNeeded="false"></activity>
-		<activity android:name="SplashScreenActivity">
-			<intent-filter>
-				<action android:name="android.intent.action.MAIN" />
-				<category android:name="android.intent.category.LAUNCHER" />
-			</intent-filter>
-		</activity>
-		<receiver android:name="AathichudiAppWidgetProvider">
-			<intent-filter>
-				<action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-			</intent-filter>
-			<meta-data android:name="android.appwidget.provider"
-				android:resource="@xml/appwidget_info" />
-		</receiver>
-	</application>
+    package="com.pongal.aathichudi"
+    android:versionCode="8"
+    android:versionName="3" >
+
+    <uses-sdk android:minSdkVersion="7" />
+
+    <application
+        android:allowClearUserData="true"
+        android:debuggable="false"
+        android:enabled="true"
+        android:hasCode="true"
+        android:icon="@drawable/icon"
+        android:label="@string/app_name"
+        android:persistent="true"
+        android:theme="@android:style/Theme.Light.NoTitleBar" >
+        <activity
+            android:name="Aathichudi"
+            android:label="@string/app_name"
+            android:stateNotNeeded="false" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <receiver android:name="AathichudiAppWidgetProvider" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/appwidget_info" />
+        </receiver>
+    </application>
 
 </manifest>

@@ -4,9 +4,11 @@ import static android.view.ViewGroup.LayoutParams.FILL_PARENT;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 import android.content.Context;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -20,7 +22,6 @@ public class MaximViewer extends LinearLayout {
 	private TableLayout table;
 	private Util util;
 	private ScrollView scrollView;
-	private HeaderView header;
 	private final Context context;
 
 	public MaximViewer(Context context) {
@@ -28,48 +29,22 @@ public class MaximViewer extends LinearLayout {
 		this.context = context;
 		setOrientation(LinearLayout.VERTICAL);
 		util = new Util(context);
-		header = new HeaderView(context, util, navigationHandler());
 		scrollView = new ScrollView(context);
 		table = new TableLayout(context);
 		scrollView.addView(table);
-		addView(header);
 		addView(scrollView);
 	}
-	
-	private OnClickListener navigationHandler() {
-		return new View.OnClickListener() {
-			public void onClick(View v) {
-				render((Item) v.getTag());
-			}
-		};
-	}
 
-	public void render(final Item item) {
-		Animation makeOutAnimation = AnimationUtils.makeOutAnimation(context, false);
-		makeOutAnimation.setDuration(1000L);
-		makeOutAnimation.setAnimationListener(new Animation.AnimationListener() {
-			
-			public void onAnimationStart(Animation animation) {}
-			
-			public void onAnimationRepeat(Animation animation) {}
-			
-			public void onAnimationEnd(Animation animation) {
-				Animation makeInAnimation = AnimationUtils.makeInAnimation(context, false);
-				makeInAnimation.setDuration(1000L);
-				startAnimation(makeInAnimation);
-				someMethod(item);
-			}
-		});
-		startAnimation(makeOutAnimation);
-	}
-	
-	public void someMethod(Item item){
+	public void render(final Item item, final View view) {
+		Animation makeInAnimation = AnimationUtils.loadAnimation(context,
+				R.layout.fade_in);
+		makeInAnimation.setDuration(5000L);
+		table.startAnimation(makeInAnimation);
 		setTag(item);
-		table.removeAllViews();
-		scrollView.scrollTo(0, 0);
-		header.render(item);
-		for (Item child : item.getChildren()) {
-			table.addView(getRowView(child));
+		final int groupIndex = view == null ? 0 : table.indexOfChild(view) + 1;
+		for (final Item child : item.getChildren()) {
+			LinearLayout rowView = getRowView(child);
+			table.addView(rowView, groupIndex);
 		}
 	}
 
@@ -84,7 +59,8 @@ public class MaximViewer extends LinearLayout {
 		int textStyle = item.hasShortDesc() ? Typeface.BOLD : Typeface.NORMAL;
 		TextView textView = util.createTamilTextView(0xFF000000, 18, textStyle);
 		textView.setText(item.getText());
-		textView.setLayoutParams(new LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT, 1));
+		textView.setLayoutParams(new LinearLayout.LayoutParams(WRAP_CONTENT,
+				WRAP_CONTENT, 1));
 		rowLayout.addView(textView);
 
 		if (!item.getChildren().isEmpty()) {
@@ -102,7 +78,7 @@ public class MaximViewer extends LinearLayout {
 		wrapper.addView(rowLayout);
 
 		if (item.hasShortDesc()) {
-			TextView desc = util.createTamilTextView(0xFF000000, 14,
+			TextView desc = util.createTamilTextView(0xEE000000, 14,
 					Typeface.NORMAL);
 			desc.setText(item.getShortDesc());
 			wrapper.addView(desc);
@@ -113,8 +89,26 @@ public class MaximViewer extends LinearLayout {
 
 	private OnClickListener getClickListener() {
 		return new OnClickListener() {
-			public void onClick(View v) {
-				render((Item) v.getTag());
+			public void onClick(final View v) {
+				Animation makeInAnimation = AnimationUtils.loadAnimation(
+						context, R.layout.fade_in);
+				makeInAnimation.setDuration(500L);
+				makeInAnimation.setAnimationListener(new AnimationListener() {
+
+					public void onAnimationStart(Animation animation) {
+						// render((Item) v.getTag(), v);
+					}
+
+					public void onAnimationRepeat(Animation animation) {
+						// TODO Auto-generated method stub
+					}
+
+					public void onAnimationEnd(Animation animation) {
+
+					}
+				});
+				//v.startAnimation(makeInAnimation);
+				render((Item) v.getTag(), v);
 			}
 		};
 	}
@@ -128,7 +122,6 @@ public class MaximViewer extends LinearLayout {
 				}
 				if (event.getAction() == MotionEvent.ACTION_UP
 						|| event.getAction() == MotionEvent.ACTION_CANCEL) {
-					v.setBackgroundResource(R.layout.cellbg);
 				}
 				return false;
 			}
@@ -136,10 +129,8 @@ public class MaximViewer extends LinearLayout {
 	}
 
 	private void setRowStyle(LinearLayout row) {
-		row.setBackgroundResource(R.layout.cellbg);
 		row.setLayoutParams(new LayoutParams(FILL_PARENT, FILL_PARENT));
 		row.setPadding(10, 10, 10, 10);
 	}
-
 
 }

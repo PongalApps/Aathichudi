@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -12,7 +13,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.pongal.aathichudi.model.Item;
-import com.pongal.aathichudi.model.MaximRow;
 
 public class DBManager {
 	Context context;
@@ -26,32 +26,27 @@ public class DBManager {
 		helper.close();
 	}
 
-	public Item getContents() {
-		List<MaximRow> rows = getItems(null);
-		Map<Integer, Item> refMap = new HashMap<Integer, Item>();
-		for (MaximRow row : rows) {
-			refMap.put(row.id, new Item(row));
-		}
-		Item root = null;
-		for (MaximRow row : rows) {
-			Item currItem = refMap.get(row.id);
-			if (row.group_id != 0) {
-				Item parent = refMap.get(row.group_id);
-				parent.addChild(currItem);
-			} else {
-				root = currItem;
-			}
-		}
-		return root;
+	public Item getMaximTree(Integer groupId) {
+		String queryString = (groupId == null) ? null : 
+			"group_id = '"+ groupId.toString() +"'" + " or id ='" + groupId.toString() + "'";
+		List<MaximRow> rows = getItems(queryString, null);
+		return listToTree(rows);
 	}
-
-	List<MaximRow> getItems(String selectionString) {
+	
+	public Item getRandomMaxim() {
+		Random randomNumber = new Random();
+		List<MaximRow> items = getItems("shortDesc != ''", null);
+		MaximRow randomMaxim = items.get(randomNumber.nextInt(108) + 1);
+		return new Item(randomMaxim.id, randomMaxim.text, randomMaxim.shortDescription);
+	}
+	
+	private List<MaximRow> getItems(String selectionString, String[] selectionArgs) {
 		List<MaximRow> items = new ArrayList<MaximRow>();
 		Cursor cursor;
 		try {
 			cursor = db.query("contents", new String[] { "id", "text",
-					"shortDesc", "group_id" }, selectionString, null, null,
-					null, null, null);
+					"shortDesc", "group_id" }, selectionString, selectionArgs, null,
+					null, "abs(id)");
 
 			while (cursor.moveToNext()) {
 				items.add(new MaximRow(cursor.getInt(0), cursor.getString(1),
@@ -66,32 +61,23 @@ public class DBManager {
 		db.close();
 		return items;
 	}
-
-	public List<MaximRow> getMaxims() {
-		return getItems("shortDesc != ''");
+	
+	private Item listToTree(List<MaximRow> rows) {
+		Map<Integer, Item> refMap = new HashMap<Integer, Item>();
+		for (MaximRow row : rows) {
+			refMap.put(row.id, new Item(row.id, row.text, row.shortDescription));
+		}
+		Item root = null;
+		for (MaximRow row : rows) {
+			Item currItem = refMap.get(row.id);
+			Item parent = refMap.get(row.group_id);
+			if (row.group_id != 0 && parent != null) {
+				parent.addChild(currItem);
+			} else {
+				root = currItem;
+			}
+		}
+		return root;		
 	}
 
-	public Item getNode(Integer groupId) {
-		MaximRow category = new MaximRow();
-		try {
-			Cursor cursor = db.query("contents", new String[] { "id", "text",
-							"shortDesc", "group_id" }, "id = ?",
-							new String[] { groupId.toString() }, null, null,
-							null, null);
-			cursor.moveToNext();
-			category = new MaximRow(cursor.getInt(0), cursor.getString(1),
-					cursor.getString(2), cursor.getInt(3));
-			cursor.close();
-
-		} catch (SQLException e) {
-			Log.d("DB ERROR", e.toString());
-			e.printStackTrace();
-		}
-		Item root = getContents();
-		for (Item child : root.getChildren()) {
-			if (child.getText().equals(category.text))
-				return child;
-		}
-		return root;
-	}
 }

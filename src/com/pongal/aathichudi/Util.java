@@ -17,11 +17,11 @@ public class Util {
 	}
 	
 	
-	public TextView createTamilTextView(int color, int size, int style) {
+	public TextView createTamilTextView(int color, int textSize, int style) {
 		TextView textView = new TextView(context);
 		textView.setTypeface(tf, style);
 		textView.setTextColor(color);
-		textView.setTextSize(size);
+		textView.setTextSize(textSize);
 		return textView;
 	}
 	

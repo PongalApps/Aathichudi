@@ -2,6 +2,7 @@ package com.pongal.aathichudi;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import com.pongal.aathichudi.db.DBManager;
 import com.pongal.aathichudi.model.Item;
@@ -14,36 +15,16 @@ public class Aathichudi extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		if (savedInstanceState != null) {
-			currentNode = (Item) savedInstanceState.getSerializable("data");
-		} else {
-			DBManager manager = new DBManager(getApplicationContext());
-			if (getIntent().hasExtra("groupId")) {
-				currentNode = manager.getNode(getIntent().getExtras().getInt(
-						"groupId"));
-			} else
-				currentNode = manager.getContents();
-		}
 
+		DBManager manager = new DBManager(getApplicationContext());
+		currentNode = getIntent().hasExtra("groupId") ? manager
+				.getMaximTree(getIntent().getExtras().getInt("groupId")) : manager
+				.getMaximTree(null);
 		maximViewer = new MaximViewer(getApplicationContext());
-		maximViewer.render(currentNode);
+		maximViewer.render(currentNode, null);
 		setContentView(maximViewer);
-	}
-
-	@Override
-	public void onBackPressed() {
-		Item item = maximViewer.getItem();
-		if (item.getParent() != null) {
-			currentNode = item.getParent();
-			maximViewer.render(currentNode);
-		} else {
-			finish();
-		}
-	}
-
-	@Override
-	protected void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
-		outState.putSerializable("data", maximViewer.getItem());
+//		TextView tv = new TextView(getApplicationContext());
+//		tv.setText("sample");
+//		setContentView(tv);
 	}
 }

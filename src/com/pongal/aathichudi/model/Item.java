@@ -10,15 +10,21 @@ public class Item implements Serializable {
 	private LinkedList<Item> children = new LinkedList<Item>();
 	private String text;
 	private String shortDesc;
+	private Integer id;
 
-	public Item(MaximRow row) {
-		this.text = row.text;
-		this.shortDesc = row.shortDescription;
+	public Item(Integer id, String text, String shortDesc) {
+		this.id = id;
+		this.text = text;
+		this.shortDesc = shortDesc;
 	}
 
 	public void addChild(Item item) {
 		children.add(item);
 		item.parent = this;
+	}
+	
+	public Integer getId() {
+		return this.id;
 	}
 
 	public Item getParent() {
