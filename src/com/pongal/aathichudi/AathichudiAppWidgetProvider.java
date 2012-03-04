@@ -10,6 +10,7 @@ import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.View.MeasureSpec;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.RemoteViews;
@@ -17,12 +18,15 @@ import android.widget.TextView;
 
 import com.pongal.aathichudi.db.DBManager;
 import com.pongal.aathichudi.model.Item;
+import com.pongal.aathichudi.widget.TamilTextView;
+import com.pongal.aathichudi.widget.Util;
 
 public class AathichudiAppWidgetProvider extends AppWidgetProvider {
 
 	public void onUpdate(Context context, AppWidgetManager appWidgetManager,
 			int[] appWidgetIds) {
 		Item maxim = new DBManager(context).getRandomMaxim();
+		Log.d("aa", "maxim: " + maxim.getText());
 		RemoteViews views = new RemoteViews(context.getPackageName(),
 				R.layout.appwidget);
 		Bitmap textView = createTextImage(context, maxim.getText(), 20);
@@ -43,7 +47,7 @@ public class AathichudiAppWidgetProvider extends AppWidgetProvider {
 
 	private Bitmap createTextImage(Context context, String text, int textSize) {
 		Util util = new Util(context);
-		TextView textView = util.createTamilTextView(0xFFFFFFFF, textSize,
+		TextView textView = new TamilTextView(context, 0xFFFFFFFF, textSize,
 				Typeface.NORMAL);
 		textView.setText(text);
 		textView.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,

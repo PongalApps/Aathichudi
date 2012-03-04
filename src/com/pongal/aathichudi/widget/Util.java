@@ -1,7 +1,6 @@
-package com.pongal.aathichudi;
+package com.pongal.aathichudi.widget;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.util.TypedValue;
 import android.widget.TextView;
@@ -17,7 +16,7 @@ public class Util {
 	}
 	
 	
-	public TextView createTamilTextView(int color, int textSize, int style) {
+	public TextView createTamilTextView11(int color, int textSize, int style) {
 		TextView textView = new TextView(context);
 		textView.setTypeface(tf, style);
 		textView.setTextColor(color);

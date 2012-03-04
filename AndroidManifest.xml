@@ -8,7 +8,7 @@
 
     <application
         android:allowClearUserData="true"
-        android:debuggable="false"
+        android:debuggable="true"
         android:enabled="true"
         android:hasCode="true"
         android:icon="@drawable/icon"

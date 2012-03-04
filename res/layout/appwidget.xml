@@ -7,7 +7,7 @@
 	    android:id="@+id/linearLayout1"
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent"
-	    android:background="@layout/layer_list"
+	    android:background="@layout/widget_bg"
 	    android:orientation="vertical" >
 
 		<ImageView android:padding="10sp" android:layout_width="wrap_content"

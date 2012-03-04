@@ -2,7 +2,6 @@
 <resources>
     <style name="chudi">
         <item name="android:padding">10px</item>
-        <item name="android:background">@layout/cellbg</item>
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
     </style>

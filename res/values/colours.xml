@@ -1,0 +1,5 @@
+<resources>
+    <color name="maxim_normal">#000000</color>
+    <color name="maxim_highlight">#647839</color>
+    <color name="maxim_header_highlight">#647839</color>
+</resources>
